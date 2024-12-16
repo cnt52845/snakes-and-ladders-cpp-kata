@@ -4,4 +4,5 @@
 
 class PlayersImpl : public Players {
 public:
+    void addPlayer(std::string name) override {}
 };
