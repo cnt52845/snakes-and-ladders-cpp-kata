@@ -1,13 +1,15 @@
+#include <memory>
 #include <gtest/gtest.h>
 #include "players_impl.h"
 
-TEST(PlayersImpl, CanCreateInstance)
-{
-    PlayersImpl players;
-}
+class PlayersImplTest : public ::testing::Test {
+public:
+    void SetUp() override { players = std::make_shared<PlayersImpl>(); }
 
-TEST(PlayersImpl, CanAddPlayer)
+    std::shared_ptr<PlayersImpl> players;
+};
+
+TEST_F(PlayersImplTest, CanAddPlayer)
 {
-    PlayersImpl players;
-    players.addPlayer("1");
+    players->addPlayer("1");
 }
