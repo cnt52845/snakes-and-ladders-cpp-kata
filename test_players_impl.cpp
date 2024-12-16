@@ -13,3 +13,9 @@ TEST_F(PlayersImplTest, CanAddPlayer)
 {
     players->addPlayer("1");
 }
+
+TEST_F(PlayersImplTest, CanGetName)
+{
+    players->addPlayer("1");
+    ASSERT_EQ("1", players->getName());
+}
