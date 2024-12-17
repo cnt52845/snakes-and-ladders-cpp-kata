@@ -28,3 +28,8 @@ TEST_F(PlayersImplTest, Given_nextPlayer_called_When_no_players_added_Then_playe
     ASSERT_EQ("", players.getName());
     ASSERT_EQ(0, players.getPosition());
 }
+
+TEST_F(PlayersImplTest, CanAddPlayer)
+{
+    players.addPlayer("1");
+}
