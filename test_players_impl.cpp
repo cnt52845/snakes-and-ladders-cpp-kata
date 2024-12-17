@@ -15,3 +15,9 @@ TEST_F(PlayersImplTest, Given_getPosition_called_When_no_players_added_Then_retu
 {
     ASSERT_EQ(0, players.getPosition());
 }
+
+TEST_F(PlayersImplTest, Given_setPosition_called_When_no_players_added_Then_position_not_changed)
+{
+    players.setPosition(1);
+    ASSERT_EQ(0, players.getPosition());
+}
