@@ -8,4 +8,5 @@ public:
     int         getPosition() const override { return 0; }
     void        setPosition(int) override {}
     void        nextPlayer() override {}
+    void        addPlayer(std::string name) {}
 };
