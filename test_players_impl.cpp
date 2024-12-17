@@ -10,3 +10,8 @@ TEST_F(PlayersImplTest, Given_getName_called_When_no_players_added_Then_return_e
 {
     ASSERT_EQ("", players.getName());
 }
+
+TEST_F(PlayersImplTest, Given_getPosition_called_When_no_players_added_Then_return_zero)
+{
+    ASSERT_EQ(0, players.getPosition());
+}
