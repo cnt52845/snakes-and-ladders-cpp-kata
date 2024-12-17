@@ -41,3 +41,8 @@ TEST_F(TestPlayersImplOnePlayer, Given_getName_called_When_one_player_added_Then
 {
     ASSERT_EQ("1", players.getName());
 }
+
+TEST_F(TestPlayersImplOnePlayer, Given_getPosition_called_When_one_player_added_Then_return_zero)
+{
+    ASSERT_EQ(0, players.getPosition());
+}
