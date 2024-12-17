@@ -33,3 +33,9 @@ TEST_F(PlayersImplTest, CanAddPlayer)
 {
     players.addPlayer("1");
 }
+
+TEST_F(PlayersImplTest, Given_getName_called_When_one_player_added_Then_return_name)
+{
+    players.addPlayer("1");
+    ASSERT_EQ("1", players.getName());
+}
