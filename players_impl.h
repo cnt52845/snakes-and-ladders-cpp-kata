@@ -7,4 +7,5 @@ public:
     std::string getName() const override { return ""; }
     int         getPosition() const override { return 0; }
     void        setPosition(int) override {}
+    void        nextPlayer() override {}
 };
