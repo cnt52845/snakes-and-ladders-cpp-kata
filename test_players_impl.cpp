@@ -21,3 +21,10 @@ TEST_F(PlayersImplTest, Given_setPosition_called_When_no_players_added_Then_posi
     players.setPosition(1);
     ASSERT_EQ(0, players.getPosition());
 }
+
+TEST_F(PlayersImplTest, Given_nextPlayer_called_When_no_players_added_Then_player_not_changed)
+{
+    players.nextPlayer();
+    ASSERT_EQ("", players.getName());
+    ASSERT_EQ(0, players.getPosition());
+}
