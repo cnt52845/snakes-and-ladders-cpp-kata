@@ -28,7 +28,14 @@ public:
         players[currentPlayerIndex].position = position;
     }
 
-    void nextPlayer() override { currentPlayerIndex++; }
+    void nextPlayer() override
+    {
+        if (!players.size()) {
+            return;
+        }
+        currentPlayerIndex++;
+        currentPlayerIndex %= players.size();
+    }
 
     void addPlayer(std::string name) { players.emplace_back(Player{name, 0}); }
 
