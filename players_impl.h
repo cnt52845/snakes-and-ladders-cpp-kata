@@ -4,23 +4,26 @@
 
 class PlayersImpl : public Players {
 public:
-    std::string getName() const override { return name; }
-    int         getPosition() const override { return position; }
+    std::string getName() const override { return player.name; }
+    int         getPosition() const override { return player.position; }
     void        setPosition(int position) override
     {
         if (isPlayerAdded) {
-            this->position = position;
+            player.position = position;
         }
     }
     void nextPlayer() override {}
     void addPlayer(std::string name)
     {
-        this->name    = name;
+        player.name   = name;
         isPlayerAdded = true;
     }
 
 private:
-    bool        isPlayerAdded{false};
-    std::string name{""};
-    int         position{0};
+    struct Player {
+        std::string name{""};
+        int         position{0};
+    };
+    Player player;
+    bool   isPlayerAdded{false};
 };
