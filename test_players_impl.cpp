@@ -68,3 +68,10 @@ TEST_F(TestPlayersImplMultiplePlayers,
 {
     ASSERT_EQ("1", players.getName());
 }
+
+TEST_F(TestPlayersImplMultiplePlayers,
+       Given_getName_called_When_nextPlayer_called_Then_return_second_player_name)
+{
+    players.nextPlayer();
+    ASSERT_EQ("2", players.getName());
+}
