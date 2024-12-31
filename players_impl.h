@@ -28,7 +28,7 @@ public:
         players[currentPlayerIndex].position = position;
     }
 
-    void nextPlayer() override {}
+    void nextPlayer() override { currentPlayerIndex++; }
 
     void addPlayer(std::string name) { players.emplace_back(Player{name, 0}); }
 
