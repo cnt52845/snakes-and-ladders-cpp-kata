@@ -53,3 +53,18 @@ TEST_F(TestPlayersImplOnePlayer,
     players.setPosition(1);
     ASSERT_EQ(1, players.getPosition());
 }
+
+class TestPlayersImplMultiplePlayers : public TestPlayersImplOnePlayer {
+public:
+    void SetUp() override
+    {
+        TestPlayersImplOnePlayer::SetUp();
+        players.addPlayer("2");
+    }
+};
+
+TEST_F(TestPlayersImplMultiplePlayers,
+       Given_getName_called_When_multiple_players_added_Then_return_first_player_name)
+{
+    ASSERT_EQ("1", players.getName());
+}
