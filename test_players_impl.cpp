@@ -83,3 +83,34 @@ TEST_F(TestPlayersImplMultiplePlayers,
     players.nextPlayer();
     ASSERT_EQ("1", players.getName());
 }
+
+TEST(TestPlayersImpl, Integration)
+{
+    std::shared_ptr<PlayersImpl> players{std::make_shared<PlayersImpl>()};
+
+    players->nextPlayer();
+    ASSERT_EQ("", players->getName());
+    ASSERT_EQ(0, players->getPosition());
+
+    players->addPlayer("1");
+    players->addPlayer("2");
+
+    ASSERT_EQ("1", players->getName());
+    ASSERT_EQ(0, players->getPosition());
+    players->setPosition(1);
+    ASSERT_EQ(1, players->getPosition());
+
+    players->nextPlayer();
+    ASSERT_EQ("2", players->getName());
+    ASSERT_EQ(0, players->getPosition());
+    players->setPosition(2);
+    ASSERT_EQ(2, players->getPosition());
+
+    players->nextPlayer();
+    ASSERT_EQ("1", players->getName());
+    ASSERT_EQ(1, players->getPosition());
+
+    players->nextPlayer();
+    ASSERT_EQ("2", players->getName());
+    ASSERT_EQ(2, players->getPosition());
+}
