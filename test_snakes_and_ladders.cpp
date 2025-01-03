@@ -36,3 +36,23 @@ TEST_F(TestSnakesAndLaders, Given_play_called_When_game_already_won_Then_return_
 
     ASSERT_EQ(returnedResult, game->play(dice1, dice2));
 }
+
+TEST_F(TestSnakesAndLaders, Given_play_called_When_next_step_wins_Then_return_player_wins)
+{
+    const int         dice1           = 3;
+    const int         dice2           = 2;
+    const int         currentPosition = 95;
+    const int         newPosition     = 100;
+    const std::string playerName      = "1";
+    const std::string returnedResult  = "Player 1 Wins!";
+
+    EXPECT_CALL(*players, getPosition()).WillOnce(Return(currentPosition));
+    EXPECT_CALL(*board, isWon(currentPosition)).WillOnce(Return(false));
+    EXPECT_CALL(*board, move(currentPosition, dice1 + dice2)).WillOnce(Return(newPosition));
+    EXPECT_CALL(*players, setPosition(newPosition));
+    EXPECT_CALL(*board, isWon(newPosition)).WillOnce(Return(true));
+    EXPECT_CALL(*players, getName()).WillOnce(Return(playerName));
+    EXPECT_CALL(*messenger, playerWins(playerName)).WillOnce(Return(returnedResult));
+
+    ASSERT_EQ(returnedResult, game->play(dice1, dice2));
+}
