@@ -13,7 +13,7 @@ public:
         return newPosition;
     }
 
-    bool isWon(int position) const override { return false; }
+    bool isWon(int position) const override { return position == BOARD_SIZE; }
 
 private:
     int applyBounceBack(int newPosition) const
