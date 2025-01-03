@@ -10,6 +10,9 @@ public:
         if (newPosition == 2) {
             newPosition = 38;
         }
+        else if (newPosition == 7) {
+            newPosition = 14;
+        }
         return newPosition;
     }
 };
