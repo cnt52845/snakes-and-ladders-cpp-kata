@@ -4,5 +4,5 @@
 
 class BoardImpl : public Board {
 public:
-    int move(int fromPosition, int steps) const override { return 0; }
+    int move(int fromPosition, int steps) const override { return fromPosition + steps; }
 };
