@@ -12,10 +12,14 @@ public:
         if (it != snakesAndLadders.end()) {
             newPosition = it->second;
         }
+        if (newPosition > FINISH_SQUARE) {
+            newPosition = 2 * FINISH_SQUARE - newPosition;
+        }
         return newPosition;
     }
 
 private:
+    static int constexpr FINISH_SQUARE = 100;
     std::unordered_map<int, int> snakesAndLadders{// Ladders
                                                   {2, 38},
                                                   {7, 14},
