@@ -50,3 +50,8 @@ TEST_F(TestBoardImpl, Given_isWon_called_When_position_is_not_100_Then_return_fa
 {
     ASSERT_FALSE(board.isWon(99));
 }
+
+TEST_F(TestBoardImpl, Given_isWon_called_When_position_is_100_Then_return_true)
+{
+    ASSERT_TRUE(board.isWon(100));
+}
