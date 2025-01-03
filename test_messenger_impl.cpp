@@ -13,3 +13,8 @@ TEST_F(
 {
     ASSERT_EQ("Player 1 is on square 5", messenger.playerPosition("1", 5));
 }
+
+TEST_F(TestMessengerImpl, Given_playerWins_called_When_playerName_is_1_Then_return_player_1_wins)
+{
+    ASSERT_EQ("Player 1 Wins!", messenger.playerWins("1"));
+}
