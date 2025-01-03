@@ -7,19 +7,31 @@ class BoardImpl : public Board {
 public:
     int move(int fromPosition, int steps) const override
     {
-        int  newPosition = fromPosition + steps;
-        if (newPosition > FINISH_SQUARE) {
-            newPosition = 2 * FINISH_SQUARE - newPosition;
+        int newPosition = fromPosition + steps;
+        newPosition     = applyBounceBack(newPosition);
+        newPosition     = applySnakesAndLadders(newPosition);
+        return newPosition;
+    }
+
+private:
+    int applyBounceBack(int newPosition) const
+    {
+        if (newPosition > BOARD_SIZE) {
+            newPosition = BOARD_SIZE - (newPosition - BOARD_SIZE);
         }
-        auto it          = snakesAndLadders.find(newPosition);
+        return newPosition;
+    }
+
+    int applySnakesAndLadders(int newPosition) const
+    {
+        auto it = snakesAndLadders.find(newPosition);
         if (it != snakesAndLadders.end()) {
             newPosition = it->second;
         }
         return newPosition;
     }
 
-private:
-    static int constexpr FINISH_SQUARE = 100;
+    static int constexpr BOARD_SIZE = 100;
     std::unordered_map<int, int> snakesAndLadders{// Ladders
                                                   {2, 38},
                                                   {7, 14},
