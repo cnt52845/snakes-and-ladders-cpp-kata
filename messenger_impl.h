@@ -8,4 +8,9 @@ public:
     {
         return "Player " + playerName + " is on square " + std::to_string(position);
     }
+
+    std::string playerWins(std::string playerName) const override
+    {
+        return "Player " + playerName + " Wins!";
+    }
 };
