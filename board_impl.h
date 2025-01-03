@@ -8,12 +8,12 @@ public:
     int move(int fromPosition, int steps) const override
     {
         int  newPosition = fromPosition + steps;
+        if (newPosition > FINISH_SQUARE) {
+            newPosition = 2 * FINISH_SQUARE - newPosition;
+        }
         auto it          = snakesAndLadders.find(newPosition);
         if (it != snakesAndLadders.end()) {
             newPosition = it->second;
-        }
-        if (newPosition > FINISH_SQUARE) {
-            newPosition = 2 * FINISH_SQUARE - newPosition;
         }
         return newPosition;
     }
