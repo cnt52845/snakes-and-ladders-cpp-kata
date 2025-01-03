@@ -13,4 +13,6 @@ public:
     {
         return "Player " + playerName + " Wins!";
     }
+
+    std::string gameOver() const override { return "Game over!"; }
 };
