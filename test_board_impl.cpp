@@ -1,27 +1,36 @@
 #include <gtest/gtest.h>
 #include "board_impl.h"
 
-class TestBoardImpl : public ::testing::Test {
+struct MoveTestParams {
+    int fromPosition;
+    int steps;
+    int newPosition;
+};
+
+// Define the operator<< for MoveTestParams
+std::ostream&
+operator<<(std::ostream& os, const MoveTestParams& params)
+{
+    os << "fromPosition: " << params.fromPosition << ", "
+       << "steps: " << params.steps << ", "
+       << "newPosition: " << params.newPosition;
+    return os;
+}
+
+class TestBoardImpl : public ::testing::TestWithParam<MoveTestParams> {
 public:
     BoardImpl board;
 };
 
-TEST_F(TestBoardImpl, Given_move_called_When_steps_0_Then_return_original_position)
+TEST_P(TestBoardImpl, Move)
 {
-    ASSERT_EQ(0, board.move(0, 0));
+    const auto& params = GetParam();
+    ASSERT_EQ(params.newPosition, board.move(params.fromPosition, params.steps));
 }
 
-TEST_F(TestBoardImpl, Given_move_called_When_steps_1_Then_return_position_plus_steps)
-{
-    ASSERT_EQ(1, board.move(0, 1));
-}
-
-TEST_F(TestBoardImpl, Given_move_called_When_landed_on_2_Then_return_38)
-{
-    ASSERT_EQ(38, board.move(2, 0));
-}
-
-TEST_F(TestBoardImpl, Given_move_called_When_landed_on_7_Then_return_14)
-{
-    ASSERT_EQ(14, board.move(7, 0));
-}
+INSTANTIATE_TEST_SUITE_P(MoveTests, TestBoardImpl,
+                         ::testing::Values(
+                             // Regular moves
+                             MoveTestParams{0, 0, 0}, MoveTestParams{0, 1, 1},
+                             // Snakes
+                             MoveTestParams{2, 0, 38}, MoveTestParams{7, 0, 14}));
