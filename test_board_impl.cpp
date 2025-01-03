@@ -20,3 +20,8 @@ TEST_F(TestBoardImpl, Given_move_called_When_landed_on_2_Then_return_38)
 {
     ASSERT_EQ(38, board.move(2, 0));
 }
+
+TEST_F(TestBoardImpl, Given_move_called_When_landed_on_7_Then_return_14)
+{
+    ASSERT_EQ(14, board.move(7, 0));
+}
