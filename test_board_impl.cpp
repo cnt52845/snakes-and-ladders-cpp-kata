@@ -10,3 +10,8 @@ TEST_F(TestBoardImpl, Given_move_called_When_steps_0_Then_return_original_positi
 {
     ASSERT_EQ(0, board.move(0, 0));
 }
+
+TEST_F(TestBoardImpl, Given_move_called_When_steps_1_Then_return_position_plus_steps)
+{
+    ASSERT_EQ(1, board.move(0, 1));
+}
