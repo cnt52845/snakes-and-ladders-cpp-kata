@@ -19,12 +19,18 @@ public:
         if (board->isWon(position)) {
             return messenger->gameOver();
         }
+
         position = board->move(position, dice1 + dice2);
         players->setPosition(position);
         if (board->isWon(position)) {
             return messenger->playerWins(players->getName());
         }
-        return messenger->playerPosition(players->getName(), position);
+
+        std::string playerName = players->getName();
+        if (dice1 != dice2) {
+            players->nextPlayer();
+        }
+        return messenger->playerPosition(playerName, position);
     }
 
 private:
