@@ -13,6 +13,8 @@ public:
         return newPosition;
     }
 
+    bool isWon(int position) const override { return false; }
+
 private:
     int applyBounceBack(int newPosition) const
     {
