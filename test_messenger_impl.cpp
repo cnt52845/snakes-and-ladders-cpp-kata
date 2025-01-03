@@ -18,3 +18,8 @@ TEST_F(TestMessengerImpl, Given_playerWins_called_When_playerName_is_1_Then_retu
 {
     ASSERT_EQ("Player 1 Wins!", messenger.playerWins("1"));
 }
+
+TEST_F(TestMessengerImpl, Given_gameOver_called_Then_return_game_over)
+{
+    ASSERT_EQ("Game over!", messenger.gameOver());
+}
