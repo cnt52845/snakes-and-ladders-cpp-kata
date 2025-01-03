@@ -1,8 +1,11 @@
 #include <memory>
 #include <gtest/gtest.h>
 #include "snakes_and_ladders.h"
+#include "players_impl.h"
 #include "players_mock.h"
+#include "board_impl.h"
 #include "board_mock.h"
+#include "messenger_impl.h"
 #include "messenger_mock.h"
 
 using ::testing::Return;
@@ -103,4 +106,54 @@ TEST_F(
     EXPECT_CALL(*players, nextPlayer());
 
     ASSERT_EQ(returnedResult, game->play(dice1, dice2));
+}
+
+class TestSnakesAndLadersIntegration : public ::testing::Test {
+public:
+    std::shared_ptr<PlayersImpl>      players;
+    std::shared_ptr<BoardImpl>        board;
+    std::shared_ptr<MessengerImpl>    messenger;
+    std::shared_ptr<SnakesAndLadders> game;
+
+    void SetUp() override
+    {
+        messenger = std::make_shared<MessengerImpl>();
+        board     = std::make_shared<BoardImpl>();
+        players   = std::make_shared<PlayersImpl>();
+        players->addPlayer("1");
+        players->addPlayer("2");
+        game = std::make_shared<SnakesAndLadders>(players, board, messenger);
+    }
+
+    void TearDown() override
+    {
+        game.reset();
+        players.reset();
+        board.reset();
+        messenger.reset();
+    }
+};
+
+TEST_F(TestSnakesAndLadersIntegration, PlayerOneWins)
+{
+    ASSERT_EQ("Player 1 is on square 14", game->play(4, 3));
+    ASSERT_EQ("Player 2 is on square 12", game->play(6, 6));
+    ASSERT_EQ("Player 2 is on square 26", game->play(1, 2));
+    ASSERT_EQ("Player 1 is on square 26", game->play(6, 6));
+    ASSERT_EQ("Player 1 is on square 84", game->play(1, 1));
+    ASSERT_EQ("Player 1 is on square 96", game->play(6, 6));
+    ASSERT_EQ("Player 1 is on square 98", game->play(3, 3)); // bounce back
+    ASSERT_EQ("Player 1 Wins!", game->play(1, 1));
+    ASSERT_EQ("Game over!", game->play(1, 2));
+}
+
+TEST_F(TestSnakesAndLadersIntegration, PlayerTwoWins)
+{
+    ASSERT_EQ("Player 1 is on square 14", game->play(4, 3));
+    ASSERT_EQ("Player 2 is on square 12", game->play(6, 6));
+    ASSERT_EQ("Player 2 is on square 24", game->play(6, 6));
+    ASSERT_EQ("Player 2 is on square 84", game->play(2, 2));
+    ASSERT_EQ("Player 2 is on square 96", game->play(6, 6));
+    ASSERT_EQ("Player 2 Wins!", game->play(1, 3));
+    ASSERT_EQ("Game over!", game->play(5, 4));
 }
