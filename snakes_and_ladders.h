@@ -21,8 +21,10 @@ public:
         }
         position = board->move(position, dice1 + dice2);
         players->setPosition(position);
-        board->isWon(position);
-        return messenger->playerWins(players->getName());
+        if (board->isWon(position)) {
+            return messenger->playerWins(players->getName());
+        }
+        return messenger->playerPosition(players->getName(), position);
     }
 
 private:
