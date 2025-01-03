@@ -5,6 +5,8 @@
 #include "board_mock.h"
 #include "messenger_mock.h"
 
+using ::testing::Return;
+
 class TestSnakesAndLaders : public ::testing::Test {
 public:
     std::shared_ptr<PlayersMock>      players;
@@ -21,7 +23,16 @@ public:
     }
 };
 
-TEST_F(TestSnakesAndLaders, CanPlay)
+TEST_F(TestSnakesAndLaders, Given_play_called_When_game_already_won_Then_return_game_over)
 {
-    game->play(2, 3);
+    const int         dice1           = 2;
+    const int         dice2           = 3;
+    const int         currentPosition = 100;
+    const std::string returnedResult  = "Game over!";
+
+    EXPECT_CALL(*players, getPosition()).WillOnce(Return(currentPosition));
+    EXPECT_CALL(*board, isWon(currentPosition)).WillOnce(Return(true));
+    EXPECT_CALL(*messenger, gameOver()).WillOnce(Return(returnedResult));
+
+    ASSERT_EQ(returnedResult, game->play(dice1, dice2));
 }
