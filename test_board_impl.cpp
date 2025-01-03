@@ -45,3 +45,8 @@ INSTANTIATE_TEST_SUITE_P(
         MoveTestParams{99, 0, 80},
         // Bounce back
         MoveTestParams{98, 5, 97}, MoveTestParams{98, 3, 80}));
+
+TEST_F(TestBoardImpl, Given_isWon_called_When_position_is_not_100_Then_return_false)
+{
+    ASSERT_FALSE(board.isWon(99));
+}
