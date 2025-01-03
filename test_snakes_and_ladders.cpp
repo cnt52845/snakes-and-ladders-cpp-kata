@@ -56,3 +56,27 @@ TEST_F(TestSnakesAndLaders, Given_play_called_When_next_step_wins_Then_return_pl
 
     ASSERT_EQ(returnedResult, game->play(dice1, dice2));
 }
+
+TEST_F(
+    TestSnakesAndLaders,
+    Given_play_called_When_roll_double_and_next_step_does_not_win_Then_return_player_position_and_roll_again)
+{
+    const int         dice1           = 3;
+    const int         dice2           = 3;
+    const int         currentPosition = 50;
+    const int         newPosition     = 56;
+    const std::string playerName      = "1";
+    const std::string returnedResult  = "Player 1 is on square 56";
+
+    EXPECT_CALL(*players, getPosition()).WillOnce(Return(currentPosition));
+    EXPECT_CALL(*board, isWon(currentPosition)).WillOnce(Return(false));
+    EXPECT_CALL(*board, move(currentPosition, dice1 + dice2)).WillOnce(Return(newPosition));
+    EXPECT_CALL(*players, setPosition(newPosition));
+    EXPECT_CALL(*board, isWon(newPosition)).WillOnce(Return(false));
+    EXPECT_CALL(*players, getName()).WillOnce(Return(playerName));
+    EXPECT_CALL(*messenger, playerPosition(playerName, newPosition))
+        .WillOnce(Return(returnedResult));
+    EXPECT_CALL(*players, nextPlayer()).Times(0);
+
+    ASSERT_EQ(returnedResult, game->play(dice1, dice2));
+}
