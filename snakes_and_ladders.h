@@ -15,8 +15,14 @@ public:
 
     std::string play(int dice1, int dice2)
     {
-        board->isWon(players->getPosition());
-        return messenger->gameOver();
+        int position = players->getPosition();
+        if (board->isWon(position)) {
+            return messenger->gameOver();
+        }
+        position = board->move(position, dice1 + dice2);
+        players->setPosition(position);
+        board->isWon(position);
+        return messenger->playerWins(players->getName());
     }
 
 private:
