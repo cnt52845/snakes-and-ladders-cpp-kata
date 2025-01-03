@@ -42,4 +42,6 @@ INSTANTIATE_TEST_SUITE_P(
         MoveTestParams{16, 0, 6}, MoveTestParams{46, 0, 25}, MoveTestParams{49, 0, 11},
         MoveTestParams{62, 0, 19}, MoveTestParams{64, 0, 60}, MoveTestParams{74, 0, 53},
         MoveTestParams{89, 0, 68}, MoveTestParams{92, 0, 88}, MoveTestParams{95, 0, 75},
-        MoveTestParams{99, 0, 80}));
+        MoveTestParams{99, 0, 80},
+        // Bounce back
+        MoveTestParams{98, 5, 97}));
